@@ -7,10 +7,10 @@ from chat_bot_v1 import DvmnBot
 
 load_dotenv()
 
-url = 'https://dvmn.org/api/long_polling/'
-token = os.environ['DVMN_TOKEN']
+dvmn_url = 'https://dvmn.org/api/long_polling/'
+dvmn_token = os.environ['DVMN_TOKEN']
 headers = {
-    'Authorization': f'Token {token}'
+    'Authorization': f'Token {dvmn_token}'
 }
 
 
@@ -37,7 +37,7 @@ def main():
 
 
 def ask_for_events(timestamp):
-    checking = requests.get(url, headers=headers, timeout=5, params=timestamp)
+    checking = requests.get(dvmn_url, headers=headers, timeout=5, params=timestamp)
     checking.raise_for_status()
 
     return checking.json()

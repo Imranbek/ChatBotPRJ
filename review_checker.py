@@ -1,4 +1,5 @@
 import os
+import time
 from random import choice
 
 import requests
@@ -33,6 +34,7 @@ def main():
                 timestamp = {'timestamp': checking_body['last_attempt_timestamp']}
 
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+            time.sleep(60)
             continue
 
 

@@ -1,4 +1,3 @@
-import json
 import os
 
 import requests
@@ -18,6 +17,7 @@ headers = {
 
 def main():
     chat_id = input("Please enter your chat_id:\n")
+    print('Start looking for new reviews')
     timestamp = {}
     my_bot = DvmnBot()
     while True:

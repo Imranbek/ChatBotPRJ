@@ -7,7 +7,6 @@ from chat_bot_v1 import DvmnBot
 
 load_dotenv()
 
-folder = 'fogy'
 url = 'https://dvmn.org/api/long_polling/'
 token = os.environ['DVMN_TOKEN']
 headers = {

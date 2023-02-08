@@ -10,7 +10,6 @@ load_dotenv()
 class DvmnBot:
     def __init__(self):
         token = os.environ['BOT_TOKEN']
-        # self.chat_id = 222247656
         self.bot = telegram.Bot(token=token)
         self.message_positive = 'Поздравляем, Вы проделали отличную работу! Преподавателю все понравилось, можете приступать к следующему уроку!'
         self.message_negative = ['К сожалению, в работе нашлись ошибки, которые необходимо исправить. Удачи на следующем ревью! Мы верим в Вас!',

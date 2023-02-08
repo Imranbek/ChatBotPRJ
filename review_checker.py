@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 
 from chat_bot_v1 import DvmnBot
 
-load_dotenv()
-
 dvmn_url = 'https://dvmn.org/api/long_polling/'
 dvmn_token = os.environ['DVMN_TOKEN']
 headers = {
@@ -21,7 +19,9 @@ def main():
     bot = DvmnBot()
     while True:
         try:
-            checking_body = ask_for_events(timestamp=timestamp if timestamp else None)
+            checking_new_event = requests.get(dvmn_url, headers=headers, timeout=5, params=timestamp)
+            checking_new_event.raise_for_status()
+            checking_body = checking_new_event.json()
 
             if checking_body['status'] == 'timeout':
                 timestamp = {'timestamp': checking_body['timestamp_to_request']}
@@ -36,12 +36,6 @@ def main():
             continue
 
 
-def ask_for_events(timestamp):
-    checking = requests.get(dvmn_url, headers=headers, timeout=5, params=timestamp)
-    checking.raise_for_status()
-
-    return checking.json()
-
-
 if __name__ == '__main__':
+    load_dotenv()
     main()

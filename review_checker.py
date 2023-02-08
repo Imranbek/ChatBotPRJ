@@ -6,14 +6,15 @@ import requests
 import telegram
 from dotenv import load_dotenv
 
-dvmn_url = 'https://dvmn.org/api/long_polling/'
-dvmn_token = os.environ['DVMN_TOKEN']
-headers = {
-    'Authorization': f'Token {dvmn_token}'
-}
 
 
 def main():
+    dvmn_url = 'https://dvmn.org/api/long_polling/'
+    dvmn_token = os.environ['DVMN_TOKEN']
+    headers = {
+        'Authorization': f'Token {dvmn_token}'
+    }
+
     chat_id = input("Please enter your chat_id:\n")
     print('Start looking for new reviews')
     timestamp = {}

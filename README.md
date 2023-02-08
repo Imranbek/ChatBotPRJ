@@ -1,24 +1,53 @@
 # ChatBotPRJ
 
-This script can check your reviews and send you a message about new review in telegram bot @DvmnLsnBot.
+Этот скрипт поможет Вам получать сообщения о результатах ревью от ревьюера школы dvmn.org в Телеграм.
 
-# How to Install
+# Установка
 
-Python 3 should be already installed. Then use pip (or pip3 if there is a conflict with old Python 2 setup) to install dependencies:
+Для запуска скрипта должен быть предустановлен Python 3. 
+Далее воспользуйтесь консольной командой pip (или pip3) для установки зависемостей:
 
 ```bash
 pip install -r requirements.txt # alternatively try pip3
 ```
 
-# Quickstart
+Так же для успешного запуска в корневой папке проекта вам необходимо создать файл .env.
+Этот файл должен содержать две перемернные:
 
-For start script you need to run the script in console/terminal.
+1.BOT_TOKEN. Для получения этого токена вам понадобится создать чат-бот в Телеграме. 
+Это легко можно сделать через чат-бот @BotFather.
+После создания чат-бота вам придет сообщение, в котором будет содержаться токен вида:
+```bash
+5411111133:AAHqefe0sdfbxSKrejgxlZOyArF_TClTYXQ
+```
+2.DVMN_TOKEN. Это ваш учебный токен в школе dvmn.org. 
+
+Содержимое файла .env в конечном счете должно выглядеть так:
 
 ```bash
-$ python review_checker.py.py
+BOT_TOKEN=1111111111:AAHqefe0sdfbxSKrejgxlZOyArF_TClTYXQ
+DVMN_TOKEN=111111111111111111111111
+``` 
+(значения указаны для примера)
+
+# Запуск
+
+Для запуска скрипта вам необходимо начать общение с вашим ботом, прописав ему команду /start.
+После этого вам необходимо получить id вашего чата с чат-ботом. 
+Это можно сделать, воспользовавшись ботом @username_to_id_bot.
+
+Если вам уже известен id вашего чата, то откройте в терминале корневой файл проекта и пропишите команду:
+
+```bash
+$ python review_checker.py
 ```
 
-# Output example:
+Сразу после запуска скрипт попросит вас ввести id вашего чата с ботом - скрипту нужно знать, 
+в какой чат отправлять информацию о ревью.
+После того, как вы передадите скрипту id чата, 
+скрипт будет ждать изменения статуса ревью и как только сататус изменится, вы получите соответствующее сообщение в ваш телеграм-бот.
+
+# Пример сообщения в телеграм-боте:
 ```
 Преподаватель проверил Вашу работу по уроку 'Отправляем уведомления о проверке работ'.
 
@@ -27,6 +56,6 @@ $ python review_checker.py.py
 Ссылка на урок: https://dvmn.org/modules/chat-bots/lesson/devman-bot/
 ```
 
-# Project Goals
+# Цели проекта
 
-The code is written for educational purposes. Training course for web-developers - [DVMN.org](https://dvmn.org/)
+Этот скрипт написан в учебных целях в рамках курса 'Разработчик чат-ботов на Python' - [DVMN.org](https://dvmn.org/)

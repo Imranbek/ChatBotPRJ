@@ -19,7 +19,7 @@ def main():
     chat_id = input("Please enter your chat_id:\n")
     print('Start looking for new reviews')
     timestamp = {}
-    my_bot = DvmnBot()
+    bot = DvmnBot()
     while True:
         try:
             # print('New req ' + str(timestamp))
@@ -32,7 +32,7 @@ def main():
                 # print(json.dumps(checking_body, indent=1))
 
                 review_info = checking_body['new_attempts'][0]
-                my_bot.send_review_message(chat_id, review_info)
+                bot.send_review_message(chat_id, review_info)
 
                 timestamp = {'timestamp': checking_body['last_attempt_timestamp']}
         except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):

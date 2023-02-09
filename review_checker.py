@@ -22,7 +22,7 @@ def main():
 
     while True:
         try:
-            new_event_response = requests.get(dvmn_url, headers=headers, timeout=5, params=timestamp)
+            new_event_response = requests.get(dvmn_url, headers=headers, params=timestamp)
             new_event_response.raise_for_status()
             event_state = new_event_response.json()
 
@@ -35,10 +35,11 @@ def main():
 
                 timestamp = {'timestamp': event_state['last_attempt_timestamp']}
 
-        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError):
+        except (requests.exceptions.Timeout):
+            continue
+        except (requests.exceptions.ConnectionError):
             time.sleep(60)
             continue
-
 
 def send_review_message(bot, chat_id, review_info):
     message_positive = 'Поздравляем, Вы проделали отличную работу! Преподавателю все понравилось, можете приступать к следующему уроку!'

@@ -15,6 +15,7 @@ def main():
     headers = {
         'Authorization': f'Token {dvmn_token}'
     }
+
     bot = turn_on_bot()
     chat_id = parce_chat_id()
     print('Start looking for new reviews')
@@ -30,8 +31,8 @@ def main():
                 timestamp = {'timestamp': event_state['timestamp_to_request']}
 
             elif event_state['status'] == 'found':
-                review_info = event_state['new_attempts'][0]
-                send_review_message(bot, chat_id, review_info)
+                message = make_review_message(event_state['new_attempts'][0])
+                bot.send_message(chat_id=chat_id, text=message)
 
                 timestamp = {'timestamp': event_state['last_attempt_timestamp']}
 
@@ -41,7 +42,7 @@ def main():
             time.sleep(60)
             continue
 
-def send_review_message(bot, chat_id, review_info):
+def make_review_message (review_info):
     message_positive = 'Поздравляем, Вы проделали отличную работу! Преподавателю все понравилось, можете приступать к следующему уроку!'
     message_negative = ['К сожалению, в работе нашлись ошибки, которые необходимо исправить. Удачи на следующем ревью! Мы верим в Вас!',
                         'В работе нашлись ошибки. Исправьте их и попробуйте еще раз =) Удачи!',
@@ -58,7 +59,7 @@ def send_review_message(bot, chat_id, review_info):
         -------
         Ссылка на урок: {lesson_url}'''
 
-    bot.send_message(chat_id=chat_id, text=message_text)
+    return message_text
 
 
 def turn_on_bot():

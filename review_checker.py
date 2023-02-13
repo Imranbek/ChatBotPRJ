@@ -15,9 +15,10 @@ def main():
     headers = {
         'Authorization': f'Token {dvmn_token}'
     }
+    token = os.environ['BOT_TOKEN']
+    bot = telegram.Bot(token=token)
 
-    bot = turn_on_bot()
-    chat_id = parce_chat_id()
+    chat_id = parse_chat_id()
     print('Start looking for new reviews')
     timestamp = {}
 
@@ -42,7 +43,8 @@ def main():
             time.sleep(60)
             continue
 
-def make_review_message (review_info):
+
+def make_review_message(review_info):
     message_positive = 'Поздравляем, Вы проделали отличную работу! Преподавателю все понравилось, можете приступать к следующему уроку!'
     message_negative = ['К сожалению, в работе нашлись ошибки, которые необходимо исправить. Удачи на следующем ревью! Мы верим в Вас!',
                         'В работе нашлись ошибки. Исправьте их и попробуйте еще раз =) Удачи!',
@@ -62,13 +64,7 @@ def make_review_message (review_info):
     return message_text
 
 
-def turn_on_bot():
-    token = os.environ['BOT_TOKEN']
-    bot = telegram.Bot(token=token)
-    return bot
-
-
-def parce_chat_id():
+def parse_chat_id():
     parser = argparse.ArgumentParser(
         description='DVMN review controller'
     )
